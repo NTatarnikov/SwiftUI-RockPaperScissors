@@ -16,9 +16,9 @@ struct ContentView: View {
     @State private var resultText = ""
     
     
-   var variants = ["Rock", "Papper", "Scissors"]
+   var variants = ["🪨", "📄", "✂️"]
     
-   @State private var appChoice = "Rock"
+   @State private var appChoice = "🪨"
     
     var body: some View {
         Form{
@@ -34,9 +34,11 @@ struct ContentView: View {
                     Button {
                         playerChoice = variants[number]
                         choiseTapped()
-                    } label: {
-                        Text(variants[number])
                     }
+                    label: {
+                            Text(variants[number])
+                    } .frame(maxWidth: .infinity, minHeight: 50)
+                        .font(.system(size: 60))
                 }
             } header: {
                 Text("Your Choice")
@@ -44,42 +46,47 @@ struct ContentView: View {
                 .alert(resultTitle, isPresented: $showingResult) {
                     Button("Continue", action: newRound)
                 } message: {
-                    Text(resultText) 
+                    Text(resultText)
                 }
             }
         }
     
     func choiseTapped(){
-        if playerChoice == "Rock" && appChoice == "Rock" {
+        // App choice is ROCK
+        if playerChoice == "🪨" && appChoice == "🪨" {
             resultTitle = "Draw!"
             resultText = "Player choice: \(playerChoice)  \nOpponent choice: \(appChoice)"
-        } else if playerChoice == "Scissors" && appChoice == "Rock" {
+        } else if playerChoice == "✂️" && appChoice == "🪨" {
             resultTitle = "Lose!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score -= 1
-        } else if playerChoice == "Papper" && appChoice == "Rock" {
+        } else if playerChoice == "📄" && appChoice == "🪨" {
             resultTitle = "Win!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score += 1
-        }else if playerChoice == "Papper" && appChoice == "Papper" {
+            
+        // App choice if Papper
+        }else if playerChoice == "📄" && appChoice == "📄" {
             resultTitle = "Draw!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
-        } else if playerChoice == "Rock" && appChoice == "Papper" {
+        } else if playerChoice == "🪨" && appChoice == "📄" {
             resultTitle = "Lose"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score -= 1
-        } else if playerChoice == "Scissors" && appChoice == "Papper" {
+        } else if playerChoice == "✂️" && appChoice == "📄" {
             resultTitle = "Win!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score += 1
-        }else if playerChoice == "Scissors" && appChoice == "Scissors" {
+            
+        // App Choice is Scissors
+        }else if playerChoice == "✂️" && appChoice == "✂️" {
             resultTitle = "Draw!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
-        } else if playerChoice == "Papper" && appChoice == "Scissors" {
+        } else if playerChoice == "📄" && appChoice == "✂️" {
             resultTitle = "Lose!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score -= 1
-        } else if playerChoice == "Rock" && appChoice == "Scissors" {
+        } else if playerChoice == "🪨" && appChoice == "✂️" {
             resultTitle = "Win!"
             resultText = "Player choice: \(playerChoice) \nOpponent choice: \(appChoice)"
             score += 1
